@@ -12,6 +12,7 @@ public class Main {
         /** Times to be scheduled:
          *  Front
          *      ON: Sunset - (15 to 30 min)
+         *      DIM: 10 pm + (0 to 30 min)
          *      OFF: 11:30 + (0 to 30 min)
          *
          *  Back
@@ -46,6 +47,12 @@ public class Main {
         Front2.set(Calendar.HOUR_OF_DAY, 23);
         Front2.add(Calendar.MINUTE, frontOffset2);
 
+        int frontOffset3 = (0 + (int)(Math.random() * ((30 + 0) + 1))) * 1;
+        Calendar Front3 = Calendar.getInstance();
+        Front3.set(Calendar.MINUTE, 0);
+        Front3.set(Calendar.HOUR_OF_DAY, 22);
+        Front3.add(Calendar.MINUTE, frontOffset3);
+
         String frontOn = Front1.get(Calendar.MINUTE) + " " + Front1.get(Calendar.HOUR_OF_DAY)
                 + " " + Front1.get(Calendar.DAY_OF_MONTH) + " " +  (Front1.get(Calendar.MONTH) + 1)
                 + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar on front";
@@ -53,6 +60,10 @@ public class Main {
         String frontOff = Front2.get(Calendar.MINUTE) + " " + Front2.get(Calendar.HOUR_OF_DAY)
                 + " " + Front2.get(Calendar.DAY_OF_MONTH) + " " +  (Front2.get(Calendar.MONTH) + 1)
                 + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar off front";
+
+        String frontDim = Front3.get(Calendar.MINUTE) + " " + Front3.get(Calendar.HOUR_OF_DAY)
+                + " " + Front3.get(Calendar.DAY_OF_MONTH) + " " +  (Front3.get(Calendar.MONTH) + 1)
+                + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar dim front 60";
 
         //System.out.println(frontOn);
         //System.out.println(frontOff);
@@ -126,17 +137,18 @@ public class Main {
                 + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar off upHall";
 
         String upHallDim = "0 21 " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + " " +
-                + (Calendar.getInstance().get(Calendar.MONTH) + 1) + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar dim upHall 60";
+                + (Calendar.getInstance().get(Calendar.MONTH) + 1) + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar dim upHall 50";
 
         try {
             PrintWriter writer = new PrintWriter("Schedule.txt", "UTF-8");
             writer.println(frontOn);
+            writer.println(frontOff);
+            writer.println(frontDim);
             writer.println(backOn1);
             writer.println(backOn2);
-            writer.println(landscapeOn);
-            writer.println(frontOff);
             writer.println(backOff1);
             writer.println(backOff2);
+            writer.println(landscapeOn);
             writer.println(landscapeOff);
             writer.println(upHallOn);
             writer.println(upHallOff);

@@ -21,7 +21,7 @@ public class Main {
                 case "on":
                     switch (args[1]) {
                         case "front":
-                            u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.Set(99)";
+                            u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[8].instances[0].SwitchMultilevel.Set(99)";
                             break;
                         case "back":
                             u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[7].instances[0].SwitchBinary.Set(99)";
@@ -37,7 +37,7 @@ public class Main {
                 case "off":
                     switch (args[1]) {
                         case "front":
-                            u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.Set(0)";
+                            u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[8].instances[0].SwitchMultilevel.Set(0)";
                             break;
                         case "back":
                             u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[7].instances[0].SwitchBinary.Set(0)";
@@ -52,6 +52,10 @@ public class Main {
                     break;
                 case "dim":
                     switch (args[1]) {
+                        case "front":
+                            u= "http://127.0.0.1:8083/ZWaveAPI/Run/devices[8].instances[0].SwitchMultilevel.Set(" +
+                                    args[2] + ")";
+                            break;
                         case "upHall":
                             u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[5].instances[0].SwitchMultilevel.Set(" +
                                     args[2] + ")";
