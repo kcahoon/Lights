@@ -33,7 +33,7 @@ public class Main {
 
 	    //Get Sunrise and Sunset times
         Location location = new Location("37.681874", "-121.768009");
-        SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "GMT-0800");
+        SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "America/Los_Angeles");
         Calendar officialSunset = calculator.getOfficialSunsetCalendarForDate(Calendar.getInstance());
 
         //Generate Front times
