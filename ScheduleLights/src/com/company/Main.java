@@ -29,6 +29,10 @@ public class Main {
          *      ON: Sunset - (15 to 30 min)
          *      DIM: 9:00 pm
          *      OFF: 11:30 pm +- (15 min)
+         *
+         *  Master
+         *      ON: Sunset - (15 to 30 min)
+         *      OFF: 11:30 pm +- (15 min)
          */
 
 	    //Get Sunrise and Sunset times
@@ -139,6 +143,25 @@ public class Main {
         String upHallDim = "0 21 " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + " " +
                 + (Calendar.getInstance().get(Calendar.MONTH) + 1) + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar dim upHall 50";
 
+        //Generate Master times
+        int masterOffset1 = (15 + (int)(Math.random() * ((30 - 15) + 1))) * -1;
+        Calendar master1 = (Calendar)officialSunset.clone();
+        master1.add(Calendar.MINUTE, masterOffset1);
+
+        int masterOffset2 = (-15 + (int)(Math.random() * ((15 + 15) + 1))) * -1;
+        Calendar master2 = Calendar.getInstance();
+        master2.set(Calendar.MINUTE, 30);
+        master2.set(Calendar.HOUR_OF_DAY, 23);
+        master2.add(Calendar.MINUTE, masterOffset2);
+
+        String masterOn = master1.get(Calendar.MINUTE) + " " + master1.get(Calendar.HOUR_OF_DAY)
+                + " " + master1.get(Calendar.DAY_OF_MONTH) + " " +  (master1.get(Calendar.MONTH) + 1)
+                + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar on master";
+
+        String masterOff = master2.get(Calendar.MINUTE) + " " + master2.get(Calendar.HOUR_OF_DAY)
+                + " " + master2.get(Calendar.DAY_OF_MONTH) + " " +  (master2.get(Calendar.MONTH) + 1)
+                + " * " + "/usr/bin/java -jar /home/pi/Lights/SwitchLights.jar off master";
+
         try {
             PrintWriter writer = new PrintWriter("Schedule.txt", "UTF-8");
             writer.println(frontOn);
@@ -153,6 +176,8 @@ public class Main {
             writer.println(upHallOn);
             writer.println(upHallOff);
             writer.println(upHallDim);
+            writer.println(masterOn);
+            writer.println(masterOff);
             writer.close();
 
         } catch(UnsupportedEncodingException e) {

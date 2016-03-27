@@ -32,6 +32,9 @@ public class Main {
                         case "upHall":
                             u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[5].instances[0].SwitchMultilevel.Set(99)";
                             break;
+                        case "master":
+                            u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[14].instances[0].SwitchBinary.Set(99)";
+                            break;
                     }
                     break;
                 case "off":
@@ -47,6 +50,9 @@ public class Main {
                             break;
                         case "upHall":
                             u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[5].instances[0].SwitchMultilevel.Set(0)";
+                            break;
+                        case "master":
+                            u = "http://127.0.0.1:8083/ZWaveAPI/Run/devices[14].instances[0].SwitchBinary.Set(0)";
                             break;
                     }
                     break;
